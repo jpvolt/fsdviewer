@@ -1,5 +1,4 @@
 import pygame
-from fsdviewer.objects import Cone, Line, LineMiddle, Car
 import math
 from threading import Thread
 
@@ -12,6 +11,41 @@ BLUE = (0, 0, 255)
 YELLOW = (255, 255, 10)
 ORANGE = (255, 69, 0)
 
+
+class Cone:
+    def __init__(self, color, x, y, size = 5):
+        self.x = x
+        self.y = y
+        self.color = color
+        self.size = size
+
+
+
+class Line:
+    def __init__(self, cone1, cone2, color, size):
+        self.cone1 = cone1
+        self.cone2 = cone2
+        self.color = color
+        self.size = size
+
+
+
+class LineMiddle:
+    def __init__(self, cone1, cone2, cone3, cone4, color, size):
+        self.cone1 = cone1
+        self.cone2 = cone2
+        self.cone3 = cone3
+        self.cone4 = cone4
+        self.color = color
+        self.size = size
+
+
+class Car:
+    def __init__(self, x, y, rot, color="black"):
+        self.x = x
+        self.y = y
+        self.rot = rot
+        self.color = color
 
 simple_map = [Cone("blue", 50, 50), Cone("blue", 150, 50), Cone("yellow", 50, 120), Cone("yellow", 150, 120)]
 simple_lines = [Line(0, 1, "red", 1), Line(0, 2, "green", 2)]
@@ -34,13 +68,9 @@ pygame.display.set_caption("E-Racing Driverless 2d Sim")
 clock = pygame.time.Clock()
 zoom = 1
 
-def draw():
+def draw(cones, lines, middleLines, cars):
 
     global zoom
-    global cones
-    global lines
-    global middleLines
-    global  cars
     # --- Main event loop
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -113,13 +143,17 @@ def draw():
 
     for cone in cones:
         if cone.color == "blue":
-            pygame.draw.circle(screen, BLUE, [(cone.x + cam_pos[0])*zoom, (cone.y + cam_pos[1])*zoom], 5*zoom)
+            pygame.draw.circle(screen, BLUE, [(cone.x + cam_pos[0])*zoom, (cone.y + cam_pos[1])*zoom], cone.size*zoom)
         elif cone.color == "yellow":
-            pygame.draw.circle(screen, YELLOW, [(cone.x + cam_pos[0])*zoom, (cone.y + cam_pos[1])*zoom], 5*zoom)
-        elif cone.color == "orange_small":
-            pygame.draw.circle(screen, ORANGE, [(cone.x + cam_pos[0])*zoom, (cone.y + cam_pos[1])*zoom], 5*zoom)
-        else:
-            pygame.draw.circle(screen, ORANGE, [(cone.x + cam_pos[0])*zoom, (cone.y + cam_pos[1])*zoom], 10*zoom)
+            pygame.draw.circle(screen, YELLOW, [(cone.x + cam_pos[0])*zoom, (cone.y + cam_pos[1])*zoom], cone.size*zoom)
+        elif cone.color == "orange":
+            pygame.draw.circle(screen, ORANGE, [(cone.x + cam_pos[0])*zoom, (cone.y + cam_pos[1])*zoom], cone.size*zoom)
+        elif cone.color == "red":
+            pygame.draw.circle(screen, RED, [(cone.x + cam_pos[0])*zoom, (cone.y + cam_pos[1])*zoom], cone.size*zoom)
+        elif cone.color == "green":
+            pygame.draw.circle(screen, GREEN, [(cone.x + cam_pos[0])*zoom, (cone.y + cam_pos[1])*zoom], cone.size*zoom)
+        elif cone.color == "black":
+            pygame.draw.circle(screen, BLACK, [(cone.x + cam_pos[0])*zoom, (cone.y + cam_pos[1])*zoom], cone.size*zoom)
 
 
     # car drawing
@@ -150,7 +184,12 @@ def draw():
         p3[1] += car.y
         p3[0] = (p3[0] + cam_pos[0])*zoom
         p3[1] = (p3[1] + cam_pos[1])*zoom
-        pygame.draw.polygon(screen, BLACK, [p1, p2, p3])
+        if car.color == "black":
+            pygame.draw.polygon(screen, BLACK, [p1, p2, p3])
+        if car.color == "blue":
+            pygame.draw.polygon(screen, BLUE, [p1, p2, p3])
+        if car.color == "green":
+            pygame.draw.polygon(screen, GREEN, [p1, p2, p3])
 
 
 

@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="fsd-viewer-jpvolt",
-    version="0.0.5",
+    version="0.0.7",
     author="João Voltani",
     author_email="jpvoltdeveloper@gmail.com",
     description="Simple 2d viewer for formula student driverless projects",

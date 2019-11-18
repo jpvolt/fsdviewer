@@ -1,3 +1,2 @@
-import fsdviewer.fsdviewer
-import fsdviewer.objects
+import fsdviewer.viewer2d
 
