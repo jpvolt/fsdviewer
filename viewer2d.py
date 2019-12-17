@@ -1,5 +1,4 @@
 import pygame
-from objects import Cone, Line, LineMiddle, Car
 import math
 from threading import Thread
 
@@ -12,6 +11,39 @@ BLUE = (0, 0, 255)
 YELLOW = (255, 255, 10)
 ORANGE = (255, 69, 0)
 
+
+class Cone:
+    def __init__(self, color, x, y):
+        self.x = x
+        self.y = y
+        self.color = color
+
+
+
+class Line:
+    def __init__(self, cone1, cone2, color, size):
+        self.cone1 = cone1
+        self.cone2 = cone2
+        self.color = color
+        self.size = size
+
+
+
+class LineMiddle:
+    def __init__(self, cone1, cone2, cone3, cone4, color, size):
+        self.cone1 = cone1
+        self.cone2 = cone2
+        self.cone3 = cone3
+        self.cone4 = cone4
+        self.color = color
+        self.size = size
+
+
+class Car:
+    def __init__(self, x, y, rot):
+        self.x = x
+        self.y = y
+        self.rot = rot
 
 simple_map = [Cone("blue", 50, 50), Cone("blue", 150, 50), Cone("yellow", 50, 120), Cone("yellow", 150, 120)]
 simple_lines = [Line(0, 1, "red", 1), Line(0, 2, "green", 2)]
@@ -34,13 +66,9 @@ pygame.display.set_caption("E-Racing Driverless 2d Sim")
 clock = pygame.time.Clock()
 zoom = 1
 
-def draw():
+def draw(cones, lines, middleLines, cars):
 
     global zoom
-    global cones
-    global lines
-    global middleLines
-    global  cars
     # --- Main event loop
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
