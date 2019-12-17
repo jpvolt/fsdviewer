@@ -1,2 +1,5 @@
 # fsdviewer
-simple 2d viewer for formula student driverless software
+
+Simple visualizing tool to help development of Formula Student driverless algorithms
+
+
