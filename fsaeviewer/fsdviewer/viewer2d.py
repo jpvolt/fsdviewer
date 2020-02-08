@@ -80,7 +80,7 @@ def draw(cones, lines, middleLines, cars):
             done = True
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_j:
-                if zoom < 10:
+                if zoom < 20:
                     zoom += 1
             if event.key == pygame.K_k:
                 if zoom > 1:
@@ -210,4 +210,5 @@ def quit():
 
 if __name__ == "__main__":
     init()
-    draw(simple_map, simple_lines, simple_middleLines, simple_cars)
+    while True:
+        draw(simple_map, simple_lines, simple_middleLines, simple_cars)
