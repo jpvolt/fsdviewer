@@ -40,16 +40,17 @@ class LineMiddle:
         self.size = size
 
 class Car:
-    def __init__(self, x, y, rot, color="black"):
+    def __init__(self, x, y, rot, steer, color="black"):
         self.x = x
         self.y = y
         self.rot = rot
+        self.steer = steer
         self.color = color
 
 simple_map = [Cone("blue", 50, 50), Cone("blue", 150, 50), Cone("yellow", 50, 120), Cone("yellow", 150, 120)]
 simple_lines = [Line(0, 1, "red", 1), Line(0, 2, "green", 2)]
 simple_middleLines = [LineMiddle(0, 2, 0, 1, "blue", 3)]
-simple_cars = [Car(50, 85, 0)]
+simple_cars = [Car(50, 85, math.pi/2, math.pi/2)]
 
 cones = []
 lines = []
@@ -165,34 +166,59 @@ def draw(cones, lines, middleLines, cars):
     for car in cars:
         p1o = [-15, 20]
         p1 = [-15, 20]
+        p1s = [-5, 0]
+        p1f = [-5, 0]
         p1[0] = p1o[0]*math.cos(car.rot) - p1o[1]*math.sin(car.rot)
         p1[1] = p1o[0]*math.sin(car.rot) + p1o[1]*math.cos(car.rot)
         p1[0] += car.x
         p1[1] += car.y
         p1[0] = (p1[0] + cam_pos[0])*zoom
         p1[1] = (p1[1] + cam_pos[1])*zoom
+        p1s[0] = p1f[0]*math.cos(car.steer+car.rot) - p1f[1]*math.sin(car.steer+car.rot)
+        p1s[1] = p1f[0]*math.sin(car.steer+car.rot) + p1f[1]*math.cos(car.steer+car.rot)
+        p1s[0] += car.x
+        p1s[1] += car.y
+        p1s[0] = (p1s[0] + cam_pos[0])*zoom
+        p1s[1] = (p1s[1] + cam_pos[1])*zoom
         p2 = [15, 20]
         p2o = [15, 20]
+        p2s = [5, 0]
+        p2f = [5, 0]
         p2[0] = p2o[0]*math.cos(car.rot) - p2o[1]*math.sin(car.rot)
         p2[1] = p2o[0]*math.sin(car.rot) + p2o[1]*math.cos(car.rot)
         p2[0] += car.x
         p2[1] += car.y
         p2[0] = (p2[0] + cam_pos[0])*zoom
         p2[1] = (p2[1] + cam_pos[1])*zoom
+        p2s[0] = p2f[0]*math.cos(car.steer+car.rot) - p2f[1]*math.sin(car.steer+car.rot)
+        p2s[1] = p2f[0]*math.sin(car.steer+car.rot) + p2f[1]*math.cos(car.steer+car.rot)
+        p2s[0] += car.x
+        p2s[1] += car.y
+        p2s[0] = (p2s[0] + cam_pos[0])*zoom
+        p2s[1] = (p2s[1] + cam_pos[1])*zoom
         p3 = [0, -20]
         p3o = [0, -20]
+        p3s = [0, -15]
+        p3f = [0, -15]
         p3[0] = p3o[0]*math.cos(car.rot) - p3o[1]*math.sin(car.rot)
         p3[1] = p3o[0]*math.sin(car.rot) + p3o[1]*math.cos(car.rot)
         p3[0] += car.x
         p3[1] += car.y
         p3[0] = (p3[0] + cam_pos[0])*zoom
         p3[1] = (p3[1] + cam_pos[1])*zoom
+        p3s[0] = p3f[0]*math.cos(car.steer+car.rot) - p3f[1]*math.sin(car.steer+car.rot)
+        p3s[1] = p3f[0]*math.sin(car.steer+car.rot) + p3f[1]*math.cos(car.steer+car.rot)
+        p3s[0] += car.x
+        p3s[1] += car.y
+        p3s[0] = (p3s[0] + cam_pos[0])*zoom
+        p3s[1] = (p3s[1] + cam_pos[1])*zoom
         if car.color == "black":
             pygame.draw.polygon(screen, BLACK, [p1, p2, p3])
         if car.color == "blue":
             pygame.draw.polygon(screen, BLUE, [p1, p2, p3])
         if car.color == "green":
             pygame.draw.polygon(screen, GREEN, [p1, p2, p3])
+        pygame.draw.polygon(screen, MAGENTA, [p1s, p2s, p3s])
 
 
 
