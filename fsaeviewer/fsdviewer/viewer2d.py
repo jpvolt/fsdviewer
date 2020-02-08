@@ -6,10 +6,13 @@ from threading import Thread
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
+MAGENTA = (255,0,255)
 RED = (255, 0, 0)
 BLUE = (0, 0, 255)
 YELLOW = (255, 255, 10)
 ORANGE = (255, 69, 0)
+
+SCALE = "None"
 
 
 class Cone:
@@ -20,15 +23,12 @@ class Cone:
         self.size = size
 
 
-
 class Line:
     def __init__(self, cone1, cone2, color, size):
         self.cone1 = cone1
         self.cone2 = cone2
         self.color = color
         self.size = size
-
-
 
 class LineMiddle:
     def __init__(self, cone1, cone2, cone3, cone4, color, size):
@@ -38,7 +38,6 @@ class LineMiddle:
         self.cone4 = cone4
         self.color = color
         self.size = size
-
 
 class Car:
     def __init__(self, x, y, rot, color="black"):
@@ -57,16 +56,20 @@ lines = []
 middleLines = []
 cars = []
 
-
-pygame.init()
-# Set the width and height of the screen [width, height]
-size = (700, 700)
-screen = pygame.display.set_mode(size)
-cam_pos = [0,0]
-pygame.display.set_caption("E-Racing Driverless 2d Sim")
-# Used to manage how fast the screen updates
-clock = pygame.time.Clock()
 zoom = 1
+size = (700, 700)
+screen = None
+cam_pos = [0,0]
+
+def init(title="Driverless 2d viewer"):
+    global screen
+    global clock
+    pygame.init()
+    # Set the width and height of the screen [width, height]
+    screen = pygame.display.set_mode(size)
+    pygame.display.set_caption(title)
+    # Used to manage how fast the screen updates
+    clock = pygame.time.Clock()
 
 def draw(cones, lines, middleLines, cars):
 
@@ -205,3 +208,6 @@ def quit():
     pygame.quit()
 
 
+if __name__ == "__main__":
+    init()
+    draw(simple_map, simple_lines, simple_middleLines, simple_cars)
