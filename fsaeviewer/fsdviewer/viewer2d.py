@@ -18,7 +18,7 @@ SCALE = "None"
 class Cone:
     def __init__(self, color, x, y, size = 5):
         self.x = x
-        self.y = y
+        self.y = -y
         self.color = color
         self.size = size
 
@@ -42,7 +42,7 @@ class LineMiddle:
 class Car:
     def __init__(self, x, y, rot, steer, color="black"):
         self.x = x
-        self.y = y
+        self.y = -y
         self.rot = rot
         self.steer = steer
         self.color = color
