@@ -50,7 +50,7 @@ class Car:
 simple_map = [Cone("blue", 50, 50), Cone("blue", 150, 50), Cone("yellow", 50, 120), Cone("yellow", 150, 120)]
 simple_lines = [Line(0, 1, "red", 1), Line(0, 2, "green", 2)]
 simple_middleLines = [LineMiddle(0, 2, 0, 1, "blue", 3)]
-simple_cars = [Car(50, 85, math.pi/2, math.pi/2)]
+simple_cars = [Car(0, 0, math.pi/2, math.pi/2)]
 
 cones = []
 lines = []
@@ -60,7 +60,7 @@ cars = []
 zoom = 1
 size = (700, 700)
 screen = None
-cam_pos = [0,0]
+cam_pos = [350,350]
 
 def init(title="Driverless 2d viewer"):
     global screen
