@@ -43,14 +43,14 @@ class Car:
     def __init__(self, x, y, rot, steer, color="black"):
         self.x = x
         self.y = -y
-        self.rot = -rot
+        self.rot = -rot+math.pi/2
         self.steer = -steer
         self.color = color
 
 simple_map = [Cone("blue", 50, 50), Cone("blue", 150, 50), Cone("yellow", 50, 120), Cone("yellow", 150, 120)]
 simple_lines = [Line(0, 1, "red", 1), Line(0, 2, "green", 2)]
 simple_middleLines = [LineMiddle(0, 2, 0, 1, "blue", 3)]
-simple_cars = [Car(0, 0, math.pi/4, -math.pi/2)]
+simple_cars = [Car(0, 0, math.pi/2, -math.pi/2)]
 
 cones = []
 lines = []
